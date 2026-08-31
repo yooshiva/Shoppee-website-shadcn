@@ -1,0 +1,420 @@
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(0.975 0.006 80);
+  --foreground: oklch(0.19 0.015 40);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.19 0.015 40);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.19 0.015 40);
+
+  --primary: oklch(0.63 0.21 35);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0.008 60);
+  --secondary-foreground: oklch(0.25 0.015 40);
+
+  --muted: oklch(0.95 0.008 60);
+  --muted-foreground: oklch(0.53 0.015 40);
+
+  --accent: oklch(0.94 0.035 45);
+  --accent-foreground: oklch(0.55 0.17 35);
+
+  --destructive: oklch(0.58 0.22 28);
+
+  --border: oklch(0.91 0.008 60);
+  --input: oklch(0.91 0.008 60);
+  --ring: oklch(0.63 0.21 35);
+
+  --chart-1: oklch(0.63 0.21 35);
+  --chart-2: oklch(0.68 0.14 70);
+  --chart-3: oklch(0.55 0.12 45);
+  --chart-4: oklch(0.48 0.08 40);
+  --chart-5: oklch(0.4 0.06 35);
+
+  --radius: 0.75rem;
+
+  --sidebar: oklch(0.985 0.004 60);
+  --sidebar-foreground: oklch(0.19 0.015 40);
+  --sidebar-primary: oklch(0.63 0.21 35);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0.015 50);
+  --sidebar-accent-foreground: oklch(0.25 0.015 40);
+  --sidebar-border: oklch(0.91 0.008 60);
+  --sidebar-ring: oklch(0.63 0.21 35);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+/* ==========================================
+   PRODUCT CARD
+   ========================================== */
+
+.product-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.055);
+  border-radius: 16px;
+  background: white;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.025),
+    0 8px 24px rgba(0, 0, 0, 0.025);
+
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(238, 77, 45, 0.15);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.06),
+    0 20px 40px rgba(0, 0, 0, 0.07);
+}
+
+/* ==========================================
+   PRODUCT IMAGE
+   ========================================== */
+
+.product-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+
+.product-image {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.07);
+}
+
+/* ==========================================
+   PRODUCT RATING BADGE
+   ========================================== */
+
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+
+  padding: 5px 9px;
+
+  font-size: 11px;
+  font-weight: 700;
+  color: #444;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+
+  backdrop-filter: blur(8px);
+}
+
+/* ==========================================
+   FIND SIMILAR
+   ========================================== */
+
+.find-similar {
+  background: rgba(255, 255, 255, 0.94);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+.find-similar button {
+  color: #ee4d2d;
+  font-weight: 600;
+}
+
+.find-similar button:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   CATEGORY TAGS
+   ========================================== */
+
+.category-pill {
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
+
+  background: #fafafa;
+
+  padding: 4px 7px;
+
+  color: #777;
+  font-size: 10px;
+  font-weight: 500;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.category-pill:hover {
+  border-color: #ffd5cb;
+  background: #fff2ef;
+  color: #ee4d2d;
+}
+
+/* ==========================================
+   PRICE
+   ========================================== */
+
+.product-price {
+  color: #ee4d2d;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+/* ==========================================
+   RATING
+   ========================================== */
+
+.product-rating {
+  color: #f59e0b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   STOCK
+   ========================================== */
+
+.product-stock {
+  color: #999;
+  font-size: 11px;
+}
+
+/* ==========================================
+   ADD TO CART
+   ========================================== */
+
+.add-cart-button {
+  width: 100%;
+
+  border-radius: 9px;
+
+  background: #ee4d2d;
+  color: white;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 4px 10px rgba(238, 77, 45, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-cart-button:hover {
+  background: #d93d20;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 7px 16px rgba(238, 77, 45, 0.2);
+}
+
+.add-cart-button:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================
+   SECTION
+   ========================================== */
+
+.market-section {
+  margin: 24px auto;
+  max-width: 1280px;
+
+  border-radius: 18px;
+
+  background: white;
+
+  padding: 24px;
+
+  box-shadow: 0 3px 18px rgba(0, 0, 0, 0.025);
+}
+
+/* ==========================================
+   SECTION TITLE
+   ========================================== */
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.section-title {
+  position: relative;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  letter-spacing: -0.3px;
+
+  color: #222;
+}
+
+.section-title::before {
+  content: "";
+
+  display: inline-block;
+
+  width: 4px;
+  height: 22px;
+
+  margin-right: 10px;
+
+  border-radius: 999px;
+
+  background: #ee4d2d;
+
+  vertical-align: -3px;
+}
+
+/* ==========================================
+   SEE MORE
+   ========================================== */
+
+.see-more-button {
+  border: 1px solid #eeeeee;
+
+  border-radius: 9px;
+
+  background: white;
+
+  padding: 9px 22px;
+
+  color: #555;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.see-more-button:hover {
+  border-color: #ee4d2d;
+  background: #fff7f5;
+  color: #ee4d2d;
+}
+
+/* ==========================================
+   SCROLLBAR
+   ========================================== */
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================
+   SELECTION
+   ========================================== */
+
+::selection {
+  background: #ffe1da;
+  color: #c9361c;
+}
